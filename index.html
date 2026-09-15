@@ -14,7 +14,7 @@ section.block{padding:52px 0}.sectionhead{margin-bottom:22px}.eyebrow{font-size:
 .legend{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.pill{padding:6px 10px;border-radius:14px;font-size:10px;font-weight:900}
 .programs-bg{background:#fff}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}.program-card{border:1px solid var(--line);border-radius:20px;padding:19px;background:#fff;min-height:160px;cursor:pointer}.program-card:hover{box-shadow:0 10px 25px #173a6812;transform:translateY(-1px)}.pdate{font-size:12px;color:var(--muted);margin:12px 0 4px}.program-card h3{color:var(--navy);font-size:18px;margin:0}.program-card p{font-size:13px;color:var(--muted);margin:5px 0}
 .review{background:var(--navy);color:#fff}.review h2{color:#fff}.reviewcards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.reviewcard{background:#fff;color:#26312e;border-radius:20px;padding:20px}.stars{color:#d99827;letter-spacing:2px}
-.modal{display:none;position:fixed;inset:0;background:#0008;z-index:30;align-items:center;justify-content:center;padding:18px}.detail{background:#fff;width:min(760px,100%);max-height:90vh;overflow:auto;border-radius:26px;padding:27px}.close{float:right;border:0;border-radius:50%;width:35px;height:35px}.meta,.box{background:#f5f7f4;border-radius:16px;padding:15px;margin-top:13px}.cta{border:0;background:#e79c37;color:#fff;border-radius:22px;padding:11px 18px;font-weight:900;margin-top:12px}footer{background:#153657;color:#dce7ee;padding:28px 0;font-size:12px}
+.modal{display:none;position:fixed;inset:0;background:#0008;z-index:30;align-items:center;justify-content:center;padding:18px}.detail{background:#fff;width:min(760px,100%);max-height:90vh;overflow:auto;border-radius:26px;padding:27px}.close{float:right;border:0;border-radius:50%;width:35px;height:35px}.meta,.box{background:#f5f7f4;border-radius:16px;padding:15px;margin-top:13px}.cta{display:inline-block;border:0;background:#e79c37;color:#fff;border-radius:22px;padding:11px 18px;font-weight:900;margin-top:12px;text-decoration:none}footer{background:#153657;color:#dce7ee;padding:28px 0;font-size:12px}
 @media(max-width:820px){.navbuttons{display:none}.cards,.reviewcards{grid-template-columns:1fr}.day{min-height:92px;padding:4px}.mini{font-size:7.5px;padding:4px;text-align:center;font-weight:800;word-break:keep-all}.mini small{font-size:7px;font-weight:800;word-break:keep-all}.month-big{font-size:32px}.month-sub{font-size:12px}section.block{padding:42px 0}}
 </style></head><body>
 <header class="hero"><div class="wrap"><span class="badge">2026학년도 2학기</span><h1>서부서로<br>수업성장 캘린더</h1><p><b>혼자가 아닌 함께 하는 서부, 서부가 서로에게 길(路)이 되어 줍니다.</b></p><p class="slogan">시작은 촘촘하게, 기본은 탄탄하게, 성장은 다양하게.</p></div></header>
@@ -87,13 +87,70 @@ section.block{padding:52px 0}.sectionhead{margin-bottom:22px}.eyebrow{font-size:
 
 <section class="block review" id="reviews"><div class="wrap"><div class="sectionhead"><div class="eyebrow" style="color:#fff">VOICE OF TEACHERS</div><h2>참여후기</h2><p></p></div><div class="reviewcards"><div class="reviewcard"><div class="stars">★★★★★</div><p>“함께 배우고 성장한 이야기를 남겨 주세요.”</p><small>프로토타입 예시</small></div><div class="reviewcard"><b>현장 스케치</b><p>행사 종료 후 사진과 자료를 행사 상세페이지에 연결합니다.</p></div><div class="reviewcard"><b>후기 남기기</b><p>Google Forms 연결 버튼이 들어갈 자리입니다.</p></div></div></div></section>
 
-<div class="modal" id="modal" onclick="if(event.target===this)closeEvent()"><div class="detail"><button class="close" onclick="closeEvent()">×</button><span class="pill" id="mcat"></span><h2 id="mtitle" style="margin-top:14px"></h2><p id="msub" class="sub"></p><div class="meta">📅 <b id="mdate"></b><br>👥 대상 · 시간 · 장소는 관련 공문 안내에 따라 업데이트</div><button class="cta">신청하기</button><div class="box"><b>ABOUT</b><p>프로그램 상세 소개와 신청 안내가 들어가는 영역입니다.</p></div><div class="box"><b>📸 현장 스케치</b><p>행사 종료 후 사진과 자료를 추가할 수 있습니다.</p></div><div class="box"><b>❤️ 참여후기</b><p></p></div></div></div>
-<footer><div class="wrap">서울특별시서부교육지원청 초등교육지원과 · 2026학년도 2학기 수업성장 캘린더</div></footer>
+<div class="modal" id="modal" onclick="if(event.target===this)closeEvent()"><div class="detail">
+<button class="close" onclick="closeEvent()">×</button><span class="pill" id="mcat"></span>
+<h2 id="mtitle" style="margin-top:14px"></h2><p id="msub" class="sub"></p>
+<div class="meta" id="eventMeta"></div>
+<div class="box" id="aboutBox"><b>ABOUT</b><p id="mabout"></p></div>
+<div class="box" id="applyBox"><b>신청 안내</b><p id="mapply"></p><a class="cta" id="applyLink" target="_blank" rel="noopener">신청하기</a></div>
+<div class="box" id="noticeBox"><b>안내사항</b><p id="mnotice"></p></div>
+<div class="box" id="resourceBox"><b>자료</b><p><a id="resourceLink" target="_blank" rel="noopener">관련 자료 보기</a></p></div>
+<div class="box"><b>📸 현장 스케치</b><p>행사 종료 후 사진과 자료를 추가할 수 있습니다.</p></div>
+<div class="box" id="reviewBox"><b>❤️ 참여후기</b><p><a id="reviewLink" target="_blank" rel="noopener">참여후기 남기기</a></p></div>
+</div></div><footer><div class="wrap">서울특별시서부교육지원청 초등교육지원과 · 2026학년도 2학기 수업성장 캘린더</div></footer>
 <script>
+const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTYC-_g8nRYsUGszpdEo9oEelSX6PLP58gV2SBzr6E5DhAzk7da7SA5wd9g2YQESxM7-C74AEp-ZfNE/pub?gid=0&single=true&output=csv";
+let sheetEvents = [];
 function go(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
 function month(m,b){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.month-panel').forEach(x=>x.classList.remove('active'));document.getElementById('m'+m).classList.add('active')}
 function allMonths(b){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.month-panel').forEach(x=>x.classList.add('active'))}
 function filterType(t,b){document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.program-card').forEach(c=>c.style.display=(t==='all'||c.dataset.type===t)?'block':'none')}
-function openEvent(d,t,c,s){document.getElementById('mdate').textContent=d.replaceAll('-','.');document.getElementById('mtitle').textContent=t;document.getElementById('mcat').textContent=c;document.getElementById('mcat').className='pill '+({"연수·워크숍": "pink", "특강": "blue", "멘토링": "green", "수업나눔·교육콘서트": "yellow", "성과공유·보고·한마당": "orange", "수다박스·협의회": "gray"})[c];document.getElementById('msub').textContent=s;document.getElementById('modal').style.display='flex'}
-function closeEvent(){document.getElementById('modal').style.display='none'}
+function parseCSV(csv){
+ const rows=[];let row=[],cell='',q=false;
+ for(let i=0;i<csv.length;i++){const ch=csv[i],next=csv[i+1];
+  if(ch==='"'){if(q&&next==='"'){cell+='"';i++;}else q=!q;}
+  else if(ch===','&&!q){row.push(cell);cell='';}
+  else if((ch==='\n'||ch==='\r')&&!q){if(ch==='\r'&&next==='\n')i++;row.push(cell);if(row.some(v=>v!==''))rows.push(row);row=[];cell='';}
+  else cell+=ch;
+ }
+ if(cell!==''||row.length){row.push(cell);rows.push(row)}
+ if(!rows.length)return[];
+ const headers=rows[0].map(h=>h.trim());
+ return rows.slice(1).map(r=>Object.fromEntries(headers.map((h,i)=>[h,(r[i]||'').trim()])));
+}
+function normalizeDate(v){
+ if(!v)return'';const s=v.trim().replace(/\./g,'-').replace(/\//g,'-').replace(/\s/g,'');
+ const m=s.match(/(\d{4})-(\d{1,2})-(\d{1,2})/);
+ return m?`${m[1]}-${m[2].padStart(2,'0')}-${m[3].padStart(2,'0')}`:v.trim();
+}
+async function loadSheet(){
+ try{const res=await fetch(SHEET_CSV_URL,{cache:'no-store'});if(!res.ok)throw new Error('HTTP '+res.status);
+ const csv=await res.text();sheetEvents=parseCSV(csv).map(x=>({...x,날짜:normalizeDate(x['날짜'])}));
+ console.log('Google Sheets 연결 완료:',sheetEvents.length,'건');}
+ catch(err){console.warn('Sheet 데이터를 불러오지 못해 기본 행사 정보로 표시합니다.',err);}
+}
+function findSheetEvent(d,t,s){
+ const same=sheetEvents.filter(e=>e['날짜']===d);if(!same.length)return null;
+ return same.find(e=>(e['행사명']||'')===t&&((e['부제']||'')===s||!e['부제']))||
+ same.find(e=>((e['행사명']||'')+' '+(e['부제']||'')).includes(t)||((e['행사명']||'')+' '+(e['부제']||'')).includes(s))||null;
+}
+function setBox(id,show){document.getElementById(id).style.display=show?'block':'none'}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function openEvent(d,t,c,s){
+ const e=findSheetEvent(d,t,s), title=e?.['행사명']||t, subtitle=e?.['부제']||s, category=e?.['분류']||c;
+ mtitle.textContent=title;msub.textContent=subtitle;mcat.textContent=category;
+ mcat.className='pill '+({"연수·워크숍":"pink","특강":"blue","멘토링":"green","수업나눔·교육콘서트":"yellow","성과공유·보고·한마당":"orange","수다박스·협의회":"gray"}[category]||'gray');
+ const meta=['📅 '+d.replaceAll('-','.')];
+ if(e?.['시간'])meta.push('⏰ '+e['시간']);if(e?.['대상'])meta.push('👥 '+e['대상']);if(e?.['장소'])meta.push('📍 '+e['장소']);if(e?.['상태'])meta.push('● '+e['상태']);
+ eventMeta.innerHTML=meta.map(x=>'<div>'+esc(x)+'</div>').join('');
+ const about=e?.['ABOUT']||'';mabout.textContent=about;setBox('aboutBox',!!about);
+ const ap=[];if(e?.['신청기간'])ap.push('신청기간: '+e['신청기간']);if(e?.['신청방법'])ap.push('신청방법: '+e['신청방법']);
+ mapply.textContent=ap.join('\n');const au=e?.['신청URL']||'';applyLink.href=au||'#';applyLink.style.display=au?'inline-block':'none';setBox('applyBox',ap.length>0||!!au);
+ const no=e?.['안내사항']||'';mnotice.textContent=no;setBox('noticeBox',!!no);
+ const ru=e?.['자료URL']||'';resourceLink.href=ru||'#';setBox('resourceBox',!!ru);
+ const rv=e?.['후기URL']||'';reviewLink.href=rv||'#';setBox('reviewBox',!!rv);
+ modal.style.display='flex';
+}
+function closeEvent(){modal.style.display='none'}
+loadSheet();
 </script></body></html>
